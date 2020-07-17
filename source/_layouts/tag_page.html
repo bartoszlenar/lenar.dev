@@ -1,0 +1,39 @@
+---
+layout: default
+title: Tag
+---
+
+<div class="wrapper">
+
+  <div class="row row--full">
+    <div class="column large-12">
+
+      <header class="page-header box">
+        <div class="box__body" style="margin: auto; width: 50%; text-align: center;">
+          <span class="title-tag">{{ page.tag }}</span>
+
+          <div class="post__tags">
+            {% for tag in page.tags %}
+              <a href="{{ site.baseurl }}/tag/{{ tag }}" style="text-decoration: none;">{{ tag }}</a>
+            {% endfor %}
+          </div>
+
+        </div>
+      </header>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="post-list">
+      {% for post in page.posts %}
+        {% include post-card.html %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row">
+    {% include pagination.html %}
+  </div>
+
+</div>

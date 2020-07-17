@@ -1,0 +1,65 @@
+title:            lenar.dev
+email:            bartosz@lenar.dev
+description:      Bartosz Lenar's space for tech thoughts.
+baseurl:          '' # The subpath of your site, e.g. /blog
+url:              'https://lenar.dev'
+github_username:  bartoszlenar
+twitter_username: bartoszlenar
+linkedin_username: bartoszlenar
+instagram_username: bartoszlenar
+timezone: Europe/Warsaw
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: pretty
+paginate:  12
+
+gems:
+  - jekyll-paginate
+  - jekyll/tagging
+
+include:
+  - _pages
+
+exclude:
+  - image_generator.rb
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+
+sass:
+  style: compressed
+
+# Tags
+tag_page_dir:         tag
+tag_page_layout:      tag_page
+tag_permalink_style:  pretty
+
+defaults:
+  -
+    scope:
+      path: "_pages"
+      type: "pages"
+    values:
+      layout: "page"
+      permalink: :basename
+  -
+    scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: posts/:title
+
+  -
+    scope:
+      path: "_drafts"
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: posts/:title

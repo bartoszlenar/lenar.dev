@@ -1,0 +1,23 @@
+{% include base_path %}
+
+<h5 class="separator">
+  <span class="separator__title">Sharing</span>
+</h5>
+
+<ul class="share-list">
+  <li>
+    <a class="share-list__link" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ base_path }}{{ page.url }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow" target="_blank" title="Share on Twitter">
+      <div data-icon="ei-sc-twitter" data-size="s" class="share-list__icon share-list__icon--twitter"></div>
+    </a>
+  </li>
+  <li>
+    <a class="share-list__link" href="https://facebook.com/sharer.php?u={{ base_path }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Facebook">
+      <div data-icon="ei-sc-facebook" data-size="s" class="share-list__icon share-list__icon--facebook"></div>
+    </a>
+  </li>
+  <li>
+    <a class="share-list__link" href="https://www.linkedin.com/shareArticle?url={{ base_path }}{{ page.url }}&title={{ page.title }}" rel="nofollow" target="_blank" title="Share on LinkedIn">
+      <div data-icon="ei-sc-linkedin" data-size="s" class="share-list__icon share-list__icon--linkedin"></div>
+    </a>
+  </li>
+</ul>
