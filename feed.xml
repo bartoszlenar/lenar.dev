@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
+  <channel>
+    <title>lenar.dev</title>
+    <description>Bartosz Lenar's space for tech thoughts.</description>
+    <link>https://lenar.dev/</link>
+    <atom:link href="https://lenar.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 05 Aug 2020 13:30:08 +0200</pubDate>
+    <lastBuildDate>Wed, 05 Aug 2020 13:30:08 +0200</lastBuildDate>
+    <generator>Jekyll v3.6.3</generator>
+    <image>
+      <url>https://lenar.dev/images/lenardev_social.png</url>
+      <title>lenar.dev</title>
+      <link>https://lenar.dev/</link>
+    </image>
+    <webfeeds:cover image="https://lenar.dev/images/lenardev_social.png" />
+    <webfeeds:icon>https://lenar.dev/images/lenardev_favicon.png</webfeeds:icon>
+    <webfeeds:logo>https://lenar.dev/images/lenardev_social.png</webfeeds:logo>
+    <webfeeds:related layout="card" target="browser"/>
+
+    
+      <item>
+        <title>Hello World!</title>
+
+        
+
+        <description>&lt;img src=&quot;https://lenar.dev/images/posts/hello-world/background_social.png&quot; /&gt; &lt;p&gt;After ten years in the IT industry, I decided to start blogging.&lt;/p&gt;
+
+&lt;p&gt;What’s perfectly understandable, no one ever reads the hello world posts, so I created this short note for the test purposes.&lt;/p&gt;
+
+&lt;p&gt;I plan to deliver one article every two months, so if you come back later (late August 2020), you should expect something technical to read and a reason to stay here a little bit longer.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Jul 2020 08:00:00 +0200</pubDate>
+        <link>https://lenar.dev/posts/hello-world</link>
+        <guid isPermaLink="true">https://lenar.dev/posts/hello-world</guid>
+      </item>
+    
+
+  </channel>
+</rss>
