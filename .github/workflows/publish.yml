@@ -1,0 +1,16 @@
+name: publish
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Publish changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: bash publish.sh

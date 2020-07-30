@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+<div class="wrapper">
+  <div class="row row--full">
+
+    <div class="column column--center medium-12 large-12 non-print">
+      <div class="grey-bg CoverImage FlexEmbed FlexEmbed--16by9" style="background-image: url({{ page.image | prepend: site.baseurl }})"></div>
+    </div>
+
+    <div class="column column--center medium-12 large-10">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+        <header class="post__header">
+          <h2 class="post__title" itemprop="name headline">{{ page.title }}</h2>
+          <time class="post__date" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time>
+        </header>
+
+        <div class="post-content heading-links" itemprop="articleBody">
+          {{ content }}
+        </div>
+
+      </article>
+      <div class="only-print">
+        Author: Bartosz Lenar, bartosz@lenar.dev<br/>
+        Date: {{ page.date | date: "%Y-%m-%d" }}<br/>
+        From: {{ page.url | prepend: site.baseurl | prepend: site.url }}<br/>
+        Licence: Creative Commons BY-NC-ND https://creativecommons.org/licenses/by-nc-nd/4.0/
+      </div>
+      <div class="post non-print">
+        <div class="post__tags">
+          {% for tag in page.tags %}
+            <a href="{{ site.baseurl }}/tag/{{ tag }}" style="text-decoration: none;">{{ tag }}</a>
+          {% endfor %}
+        </div>
+        <div>
+          <p class="font-tiny">
+            The post published under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">Creative Commons BY-NC-ND</a> licence.
+          </p>
+        </div>
+
+        {% include author.html %}
+
+        {% include share.html %}
+
+        {% if jekyll.environment == "production" %}
+        {% include disqus.html %}
+        {% endif %}
+      </div>
+    </div>
+
+  </div> <!-- row-->
+</div> <!-- wrapper -->

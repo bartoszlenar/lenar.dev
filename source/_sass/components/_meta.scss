@@ -1,0 +1,52 @@
+//---------------------------
+// Post Meta
+//---------------------------
+
+.post__tags {
+  margin-bottom: $line-height__base - half(quarter($line-height__base));
+  font-size: $font-size__medium;
+
+  a {
+    padding: half(quarter($line-height__small)) half($line-height__small);
+    margin: half(quarter($line-height__base)) quarter($line-height__base) half(quarter($line-height__base)) 0;
+    display: inline-block;
+
+    font-size: $font-size__medium;
+    line-height: $line-height__small;
+
+    color: $color__base--hover;
+    border: 1px solid $border-color;
+    text-decoration: none;
+    transition: $base-transition-speed;
+
+    &:before {
+      content: "#";
+      padding-right: 2px;
+    }
+
+    &:hover {
+      color: $color__base;
+      border-color: $color__base;
+    }
+  }
+
+  .big-tag {
+    font-size: $font-size__base;
+  }
+}
+
+.title-tag {
+  padding: half(quarter($line-height__small)) half($line-height__small);
+  margin: half(quarter($line-height__base)) quarter($line-height__base) half(quarter($line-height__base)) 0;
+  display: inline-block;
+
+  font-size: $font-size__base;
+
+  border: 1px solid $border-color;
+  text-decoration: none;
+
+  &:before {
+    content: "#";
+    padding-right: 2px;
+  }
+}
