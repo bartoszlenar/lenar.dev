@@ -40,5 +40,5 @@ excerpt: Brief list of what can you hire me for.
 ## Do I have a resume?
 
 - Yes, I do, but I have it linked at the very bottom because it's essential to me that you know all the facts that I listed above.
-- So here it is; [Bartosz Lenar Resume, version 2020-07-30](BartoszLenar_Resume_2020-07-30.pdf){:target="_blank"}.
+- So here it is; [Bartosz Lenar Resume, version 2020-09-10](BartoszLenar_Resume_2020-09-10.pdf){:target="_blank"}.
   - The same information, plus the recommendations that I received from my customers, managers, and colleagues, are [on my LinkedIn profile](https://www.linkedin.com/in/bartoszlenar/){:target="_blank"}.
