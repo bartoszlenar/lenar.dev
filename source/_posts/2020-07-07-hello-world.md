@@ -9,4 +9,4 @@ After ten years in the IT industry, I decided to start blogging.
 
 What’s perfectly understandable, no one ever reads the hello world posts, so I created this short note for the test purposes.
 
-I plan to deliver one article every two months, so if you come back later (late August 2020), you should expect something technical to read and a reason to stay here a little bit longer.
+I plan to deliver one article every two months, so if you come back later (~~late August~~ November 2020), you should expect something technical to read and a reason to stay here a little bit longer.
