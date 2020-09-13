@@ -2,6 +2,8 @@
  * Syntax highlighting styles
  */
 
+code.highlighter-rouge { font-size: $font-size__medium }
+
 .highlight {
   margin: 0 0 $line-height__base;
   background: #fff;
