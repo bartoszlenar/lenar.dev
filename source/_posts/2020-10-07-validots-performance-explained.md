@@ -9,7 +9,7 @@ tags: [ validot, code, performance, article ]
 
 The road to achieving the performance goals kicked off elegantly - with a whiteboard. To visually grasp the problem, I wrote down all possible actions from the moment user defines the object's acceptable state until they can interpret the results. Consequently, it's easier to understand the validation flow, recognize usage patterns, categorize the activities, and notice relationships between them.
 
-The first noteworthy distinction among the listed steps divides those that will be executed during each validation, and those triggered only once. Some kinds of information will inevitably depend on the validated model (_is the value correct?_), while the other can be precalculated and reused in the subsequent calls (_what is the error message?_). Furthermore, some actions are optional because why would the library care about preparing a human-readable report if the user only wants to review the `IsValid` bool flag ? Using [FluentValidation](https://fluentvalidation.net/) (a great lib, by the way), how often did you see the code similar to this one below?
+The first noteworthy distinction among the listed steps divides those that will be executed during each validation, and those triggered only once. Some kinds of information will inevitably depend on the validated model (_is the value correct?_), while the other can be precalculated and reused in the subsequent calls (_what is the error message?_). Furthermore, some actions are optional because why would the library care about preparing a human-readable report if the user only wants to review the `IsValid` bool flag ? Using [FluentValidation](https://fluentvalidation.net/){:target="_blank"} (a great lib, by the way), how often did you see the code similar to this one below?
 
 ``` csharp
 // trigger fully-featured validation process
@@ -150,11 +150,11 @@ In addition to the principles described in the above sections, Validot is interw
 
 What's the reason behind it? Well, once again, imagine having a microservice that uses Validot for the payloads incoming through its REST API. It's also a part of the internal network, so you can expect that most of the incoming calls will be correct. It happens that the result objects are immutable-ish (the core state doesn't change, but the values are lazy-loaded), so the one without errors is common and could quickly be returned in all such situations. What's more - the validation context doesn't even create the error collection if none detected. Consequently, for a valid model, Validot allocates only a single object - the validation context itself. Naturally, it also depends on the rules' logic, but overall, as a library, Validot is extremely careful when it comes to the managed heap utilization.
 
-The [benchmarks below](#validot-vs-fluentvalidation) shows that this approach paid off. In the case when your microservice is public and - let's say - as much as 60% of the incoming traffic is faulty, even then Validot could be 2.5x faster (while consuming 8x less memory) than [FluentValidation](https://fluentvalidation.net/). Results are even better in a not-that-impossible case of all traffic being correct.
+The [benchmarks below](#validot-vs-fluentvalidation) shows that this approach paid off. In the case when your microservice is public and - let's say - as much as 60% of the incoming traffic is faulty, even then Validot could be 2.5x faster (while consuming 8x less memory) than [FluentValidation](https://fluentvalidation.net/){:target="_blank"}. Results are even better in a not-that-impossible case of all traffic being correct.
 
 ## Validot vs FluentValidation
 
-[FluentValidation](https://fluentvalidation.net/) by [Jeremy Skinner](https://twitter.com/JeremySkinner) is the gold standard in the dotnet world and a great, reliable, opensource, battle-tested library that is around for years. I don't believe the one could find a better reference point for the validation benchmarks.
+[FluentValidation](https://fluentvalidation.net/){:target="_blank"} by [Jeremy Skinner](https://twitter.com/JeremySkinner){:target="_blank"} is the gold standard in the dotnet world and a great, reliable, opensource, battle-tested library that is around for years. I don't believe the one could find a better reference point for the validation benchmarks.
 
 For these test runs, I created a model containing all kinds of members. They are grouped into three sets, each containing 10k objects - the first one has errors in all items, the second one - in circa 60% of them, and the third one is error-free. Validot's specification and FluentValidation's custom validator reflect each other as much as technically possible.
 
@@ -169,13 +169,13 @@ And this is how `Validate` performs in both libs:
 | 3rd (0% errors) | FluentValidation | `659.07` | `660.00` |
 | 3rd (0% errors) | Validot | `242.92` | `78.82 ` |
 
-<small>_Benchmarks environment: Validot 1.1.0, FluentValidation 9.2.0, .NET Core 3.1.7, i7-9750H (2.60GHz, 1 CPU, 12 logical and 6 physical cores), X64 RyuJIT, macOS Catalina, BenchmarkDotNet 0.12.1. You are very welcome to [run the benchmarks yourself](https://github.com/bartoszlenar/Validot/blob/master/docs/DOCUMENTATION.md#benchmarks) and [review their code](https://github.com/bartoszlenar/Validot/tree/master/tests/Validot.Benchmarks)_</small>
+<small>_Benchmarks environment: Validot 1.1.0, FluentValidation 9.2.0, .NET Core 3.1.7, i7-9750H (2.60GHz, 1 CPU, 12 logical and 6 physical cores), X64 RyuJIT, macOS Catalina, BenchmarkDotNet 0.12.1. You are very welcome to [run the benchmarks yourself](https://github.com/bartoszlenar/Validot/blob/master/docs/DOCUMENTATION.md#benchmarks){:target="_blank"} and [review their code](https://github.com/bartoszlenar/Validot/tree/master/tests/Validot.Benchmarks){:target="_blank"}_</small>
 
 Please bear in mind that although Validot could be more performant, the trade-offs are limitations, different API, philosophy of work, and eventually - a smaller range of possibilities. Some scenarios are not possible yet - others never will be. True, Validot can't be considered a 100% replacement to FluentValidation (it's more like 90%), but I firmly believe it can handle most validation cases, including highly complex ones.
 
 ## Afterword
 
-This article about Validot is the first in the series. Validot is an open-source, MIT-licenced, fully tested, and documented project, hosted entirely on [github](https://github.com/bartoszlenar/Validot).
+This article about Validot is the first in the series. Validot is an open-source, MIT-licenced, fully tested, and documented project, hosted entirely on [github](https://github.com/bartoszlenar/Validot){:target="_blank"}.
 
 Type
 
