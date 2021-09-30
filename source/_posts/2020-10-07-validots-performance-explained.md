@@ -175,7 +175,7 @@ Please bear in mind that although Validot could be more performant, the trade-of
 
 ## Afterword
 
-This article about Validot is the first in the series. Validot is an open-source, MIT-licenced, fully tested, and documented project, hosted entirely on [github](https://github.com/bartoszlenar/Validot){:target="_blank"}.
+Validot is an open-source, MIT-licenced, fully tested, and documented project, hosted entirely on [github](https://github.com/bartoszlenar/Validot){:target="_blank"}.
 
 Type
 
