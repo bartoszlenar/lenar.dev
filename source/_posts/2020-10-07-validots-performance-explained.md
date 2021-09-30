@@ -169,7 +169,7 @@ And this is how `Validate` performs in both libs:
 | 3rd (0% errors) | FluentValidation | `659.07` | `660.00` |
 | 3rd (0% errors) | Validot | `242.92` | `78.82 ` |
 
-<small>_Benchmarks environment: Validot 1.1.0, FluentValidation 9.2.0, .NET Core 3.1.7, i7-9750H (2.60GHz, 1 CPU, 12 logical and 6 physical cores), X64 RyuJIT, macOS Catalina, BenchmarkDotNet 0.12.1. You are very welcome to [run the benchmarks yourself](https://github.com/bartoszlenar/Validot/blob/master/docs/DOCUMENTATION.md#benchmarks){:target="_blank"} and [review their code](https://github.com/bartoszlenar/Validot/tree/master/tests/Validot.Benchmarks){:target="_blank"}_</small>
+<small>_Benchmarks environment: Validot 1.1.0, FluentValidation 9.2.0, .NET Core 3.1.7, i7-9750H (2.60GHz, 1 CPU, 12 logical and 6 physical cores), X64 RyuJIT, macOS Catalina, BenchmarkDotNet 0.12.1. You are very welcome to [run the benchmarks yourself](https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#benchmarks){:target="_blank"} and [review their code](https://github.com/bartoszlenar/Validot/tree/main/tests/Validot.Benchmarks){:target="_blank"}_</small>
 
 Please bear in mind that although Validot could be more performant, the trade-offs are limitations, different API, philosophy of work, and eventually - a smaller range of possibilities. Some scenarios are not possible yet - others never will be. True, Validot can't be considered a 100% replacement to FluentValidation (it's more like 90%), but I firmly believe it can handle most validation cases, including highly complex ones.
 
