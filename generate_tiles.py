@@ -120,7 +120,7 @@ def generateSocial(candidate):
     width, height = image.size
     font = ImageFont.truetype('source/fonts/Lato/LatoLatin-Heavy.ttf', size=72)
     draw = ImageDraw.Draw(image)
-    textWrapper = textwrap.TextWrapper(width=25)
+    textWrapper = textwrap.TextWrapper(width=30)
     text = os.linesep.join(textWrapper.wrap(candidate.title))
     fontWidth, fontHeight = draw.textsize(text, font=font)
     (x, y) = ((width - fontWidth)/2, (height - fontHeight)/2)
