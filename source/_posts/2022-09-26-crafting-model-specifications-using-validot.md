@@ -2,7 +2,7 @@
 title: Crafting model specifications using Validot
 image: /images/posts/crafting-model-specifications-using-validot/background.jpg
 date: 2022-09-26 06:00:00
-tags: [ validot, code, article ]
+tags: [ validot, code, tutorial ]
 ---
 
 The Validot project comes with comprehensive documentation, excellent for looking up how certain features work. On the other hand, documentations don't always serve as great tutorials or walkthrough guides, which in Validot is very much the case. This blog post aspires to answer this problem. Following the real-life use case, we'll proceed step-by-step with creating a fully-featured specification using Validot's advanced fluent-driven interface.
