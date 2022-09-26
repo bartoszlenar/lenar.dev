@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+
+  <title>Crafting model specifications using Validot - lenar.dev</title>
+  <meta name="description" content="The Validot project comes with comprehensive documentation, excellent for looking up how certain features work. On the other hand, documentations don’t alway...">
+  <link rel="canonical" href="https://lenar.dev/posts/crafting-model-specifications-using-validot">
+  <link rel="alternate" type="application/rss+xml" title="lenar.dev" href="https://lenar.dev/feed.xml">
+  <link rel="shortcut icon" type="image/png" href="/images/lenardev_favicon.png">
+
+  <meta property="article:published_time" content="2022-09-26">
+	<meta property="og:type" content="article">
+
+	<meta property="og:locale" content="en_US">
+	<meta property="og:url" content="https://lenar.dev/posts/crafting-model-specifications-using-validot">
+	<meta property="og:title" content="Crafting model specifications using Validot">
+	<meta property="og:image" content="https://lenar.dev/images/posts/crafting-model-specifications-using-validot/background_social.png">
+  <meta property="og:description" content="The Validot project comes with comprehensive documentation, excellent for looking up how certain features work. On the other hand, documentations don’t alway...">
+  <meta property="og:site_name" content="lenar.dev">
+
+  
+  <meta property="og:tags" content="validot">
+  
+  <meta property="og:tags" content="code">
+  
+  <meta property="og:tags" content="article">
+  
+
+	<meta name="keywords" value="validot, code, article" and="post" />
+
+	<meta property="twitter:card" content="summary_large_image" >
+	<meta property="twitter:image" content="https://lenar.dev/images/posts/crafting-model-specifications-using-validot/background_social.png">
+	<meta property="twitter:title" content="Crafting model specifications using Validot">
+	<meta property="twitter:creator" content="@bartoszlenar">
+	<meta property="twitter:description" content="The Validot project comes with comprehensive documentation, excellent for looking up how certain features work. On the other hand, documentations don’t alway...">
+
+  <style type="text/css">
+    
+    /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:0.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}*,*:before,*:after{box-sizing:border-box}.wrapper{padding:22px 0}@media only screen and (min-width: 64.063em){.wrapper{padding:27px 0;margin-left:250px}}.off-canvas-container{display:flex;min-height:100vh;flex-direction:column}.off-canvas-container .wrapper{flex:1 0 auto}.icon{vertical-align:bottom}@font-face{font-family:'Lato';src:url("/fonts/Lato/Lato-Light.woff2") format("woff2"),url("/fonts/Lato/Lato-Light.woff") format("woff"),url("/fonts/Lato/Lato-Light.ttf") format("truetype");font-weight:normal;font-style:normal}@font-face{font-family:'Hack';src:url("/fonts/Hack/Hack-Regular.ttf") format("truetype");font-weight:normal;font-style:normal}table{width:100%;max-width:100%;margin-bottom:22px}table th,table td{padding:9px;text-align:left;vertical-align:top;border-top:1px solid #ECF0F1;font-weight:400;font-size:16px}table thead th{font-weight:700;text-transform:uppercase;font-size:16px;vertical-align:bottom;border-bottom:2px solid #ECF0F1}table tbody+tbody{border-top:2px solid #ECF0F1}body{color:#222;background-color:#fff;font-size:19px;font-weight:300;font-family:Lato,Georgia,serif;line-height:27px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}h1,h2,h3,h4,h5,h6{font-family:Lato,Georgia,serif;font-size:19px;font-weight:300;margin:0 0 22px}@media only screen and (max-width: 40em){h1,h2,h3,h4,h5,h6{font-size:16px}}h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{text-decoration:none}.post-content h1{font-size:28px}.post-content h2{font-size:24px}.post-content h3{font-size:19px}.post-content h4{font-size:19px}.post-content h5{font-size:19px}p{margin:0 0 27px}p.font-medium{margin:0 0 22px}p.font-small{margin:0 0 20px}p.font-tiny{margin:0 0 17px}@media only screen and (max-width: 40em){p{margin:0 0 22px}}blockquote{margin:0;padding:0 54px 0 54px;font-style:italic}@media only screen and (max-width: 40em){blockquote{padding:0 40px 0 40px}}hr{border:0;height:1px;background-color:#ECF0F1;margin:0 0 27px}@media only screen and (max-width: 40em){hr{margin:0 0 22px}}ul,ol{margin:0 0 27px}ul ul,ul ol,ol ul,ol ol{margin:0}@media only screen and (max-width: 40em){ul,ol{margin:0 0 22px}}a{color:#222;transition:.4s}a:visited{color:#222}a:hover{color:#7E7E7E}a:active{color:#222}a.custom{text-decoration:none}.only-print{display:none}@media print{.non-print{display:none}.only-print{display:inherit}.highlight{white-space:pre-wrap;word-wrap:break-word}a:link,a:visited,a{background:transparent;color:#520;font-weight:bold;text-decoration:underline;text-align:left}a{page-break-inside:avoid}a[href^=http]:after{content:" < " attr(href) "> "}article a[href^="#"]:after{content:""}a:not(:local-link):after{content:" < " attr(href) "> "}blockquote{page-break-inside:avoid}h1,h2,h3,h4,h5,h6{page-break-after:avoid;page-break-inside:avoid}img{page-break-inside:avoid;page-break-after:avoid}table,pre{page-break-inside:avoid}ul,ol,dl{page-break-before:avoid}}.box{padding-bottom:22px;margin-bottom:22px;overflow:hidden}@media only screen and (min-width: 64.063em){.box{padding-bottom:27px;margin-bottom:27px}}.box--news-letter input[type='email']{margin-bottom:0}.box__icon{float:left;width:27px;margin-right:9px}.box__title{margin:0;font-weight:300;line-height:22px}@media only screen and (min-width: 40.063em){.box__body{overflow:hidden}}.box__text{margin-top:10px;margin-bottom:0;font-size:14px;line-height:20px}.box a{text-decoration:none}.box--author,.box--news-letter{padding:22px;background-color:#FAFAFA}@media only screen and (min-width: 64.063em){.box--author,.box--news-letter{padding:27px}}img,iframe{display:block}img{height:auto;max-width:100%}.post-content img,.post-content iframe,.post-content .fluid-width-video-wrapper,.post-content .twitter-tweet{margin-bottom:22px !important}@media only screen and (max-width: 40em){.post-content img,.post-content iframe,.post-content .fluid-width-video-wrapper,.post-content .twitter-tweet{margin-bottom:20px}}.post-content p img{margin-bottom:0}.post__tags{margin-bottom:23px;font-size:16px}.post__tags a{padding:3px 10px;margin:4px 7px 4px 0;display:inline-block;font-size:16px;line-height:20px;color:#7E7E7E;border:1px solid #ECF0F1;text-decoration:none;transition:.4s}.post__tags a:before{content:"#";padding-right:2px}.post__tags a:hover{color:#222;border-color:#222}.post__tags .big-tag{font-size:19px}.title-tag{padding:3px 10px;margin:4px 7px 4px 0;display:inline-block;font-size:19px;border:1px solid #ECF0F1;text-decoration:none}.title-tag:before{content:"#";padding-right:2px}pre,code{font-family:Hack,monospace;background-color:#FAFAFA}pre{overflow:auto;margin-top:0;margin-bottom:27px;padding-left:20px;padding-right:20px;padding-top:27px;padding-bottom:27px;font-size:14px;white-space:pre;line-height:20px}@media only screen and (max-width: 40em){pre{margin-bottom:20px;padding:22px}}p code{padding:3px 6px}.row{margin:0 auto;padding-left:11px;padding-right:11px;max-width:1100px}.row:before,.row:after{display:table;clear:both;content:" "}.row .row{padding:0;margin-right:-11px;margin-left:-11px}@media only screen and (min-width: 64.063em){.row .row{margin-right:-14px;margin-left:-14px}}@media only screen and (min-width: 64.063em){.row{padding-left:14px;padding-right:14px}}.row--full{max-width:100%}.column{position:relative;float:left;padding-right:11px;padding-left:11px;width:100%}@media only screen and (min-width: 64.063em){.column{padding-right:14px;padding-left:14px}}.column--center{float:none;margin:0 auto}@media only screen{.small-1{width:8.3333333333%}.small-2{width:16.6666666667%}.small-3{width:25%}.small-4{width:33.3333333333%}.small-5{width:41.6666666667%}.small-6{width:50%}.small-7{width:58.3333333333%}.small-8{width:66.6666666667%}.small-9{width:75%}.small-10{width:83.3333333333%}.small-11{width:91.6666666667%}.small-12{width:100%}}@media only screen and (min-width: 40.063em){.medium-1{width:8.3333333333%}.medium-2{width:16.6666666667%}.medium-3{width:25%}.medium-4{width:33.3333333333%}.medium-5{width:41.6666666667%}.medium-6{width:50%}.medium-7{width:58.3333333333%}.medium-8{width:66.6666666667%}.medium-9{width:75%}.medium-10{width:83.3333333333%}.medium-11{width:91.6666666667%}.medium-12{width:100%}}@media only screen and (min-width: 64.063em){.large-1{width:8.3333333333%}.large-2{width:16.6666666667%}.large-3{width:25%}.large-4{width:33.3333333333%}.large-5{width:41.6666666667%}.large-6{width:50%}.large-7{width:58.3333333333%}.large-8{width:66.6666666667%}.large-9{width:75%}.large-10{width:83.3333333333%}.large-11{width:91.6666666667%}.large-12{width:100%}}input[type='text'],input[type='tel'],input[type='number'],input[type='email'],textarea{width:100%;max-width:100%;margin-bottom:0;display:inline-block;border:1px solid #222;margin-bottom:7px;padding:5px 10px;font-family:Lato,Georgia,serif;font-size:14px;line-height:22px;letter-spacing:1px;outline:none;background:transparent;appearance:none;border-radius:0;transition:.4s}@media only screen and (min-width: 64.063em){input[type='text'],input[type='tel'],input[type='number'],input[type='email'],textarea{padding:7px 14px}}input[type='text']:focus,input[type='tel']:focus,input[type='number']:focus,input[type='email']:focus,textarea:focus{border:1px solid #7E7E7E}.button{display:inline-block;text-align:center;padding:7px 14px;font-family:Lato,Georgia,serif;font-size:12px;line-height:22px;letter-spacing:1px;border:0;border-radius:0;text-decoration:none;color:#fff;background-color:#222;transition:.4s}.button--expand{width:100%}.button:active,.button:focus,.button:hover{color:#fff;background-color:#7E7E7E}.separator{position:relative;margin:27px auto;text-align:center;text-transform:uppercase;font-size:14px;font-weight:300;letter-spacing:1px}.separator:after{position:absolute;right:0;left:0;top:50%;content:"";border-bottom:1px solid #ECF0F1}.separator__title{position:relative;z-index:1;padding:0px 14px;background:#FFF none repeat scroll 0% 0%}@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.icon{position:relative;display:inline-block;width:25px;height:25px;overflow:hidden;fill:currentColor}.icon__cnt{width:100%;height:100%;background:inherit;fill:inherit;pointer-events:none;transform:translateX(0);-ms-transform:translate(0.5px, -0.3px)}.icon--m{width:50px;height:50px}.icon--l{width:100px;height:100px}.icon--xl{width:150px;height:150px}.icon--xxl{width:200px;height:200px}.icon__spinner{position:absolute;top:0;left:0;width:100%;height:100%}.icon--ei-spinner .icon__spinner,.icon--ei-spinner-2 .icon__spinner{-webkit-animation:spin 1s steps(12) infinite;animation:spin 1s steps(12) infinite}.icon--ei-spinner-3 .icon__spinner{-webkit-animation:spin 1.5s linear infinite;animation:spin 1.5s linear infinite}.icon--ei-sc-facebook{fill:#3b5998}.icon--ei-sc-github{fill:#333}.icon--ei-sc-google-plus{fill:#dd4b39}.icon--ei-sc-instagram{fill:#3f729b}.icon--ei-sc-linkedin{fill:#0976b4}.icon--ei-sc-odnoklassniki{fill:#ed812b}.icon--ei-sc-skype{fill:#00aff0}.icon--ei-sc-soundcloud{fill:#f80}.icon--ei-sc-tumblr{fill:#35465c}.icon--ei-sc-twitter{fill:#55acee}.icon--ei-sc-vimeo{fill:#1ab7ea}.icon--ei-sc-vk{fill:#45668e}.icon--ei-sc-youtube{fill:#e52d27}.icon--ei-sc-pinterest{fill:#bd081c}.icon--ei-sc-telegram{fill:#0088cc}.post-card{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #ECF0F1;text-align:center}.post-card__image{margin-bottom:14px;transition:.4s}@media only screen and (max-width: 40em){.post-card__image{margin-bottom:11px}}.post-card__title{line-height:22px;margin-top:0;margin-bottom:0}.post-card__title a{display:block;border-bottom:none;transition:.4s}.post-card__meta{margin-bottom:7px;font-size:12px;line-height:20px;color:#7E7E7E}.post-card__meta a{color:#7E7E7E;text-decoration:none}.post-card:hover .post-card__image{opacity:0.9}.post-card--featured__icon{position:absolute;bottom:7px;left:7px;fill:#fff}@media only screen and (min-width: 64.063em){.post-card{margin-bottom:27px;padding-bottom:27px}}.post-list{display:flex;flex-wrap:wrap;display:-webkit-flex;-webkit-flex-wrap:wrap}.post-list .post-card-wrap{display:flex;display:-webkit-flex}.post-list .post-card{width:100%}.share-list{display:flex;display:-webkit-box;display:-ms-flexbox;padding:0;border:1px solid #ECF0F1;margin-bottom:27px;line-height:20px;list-style:none}.share-list li{flex:1;-ms-flex:1;-webkit-box-flex:1;text-align:center;margin:0;border-right:1px solid #ECF0F1}.share-list li:last-child{border-right:0}.share-list__link{display:block;padding:7px;font-size:14px;transition:.4s}.share-list__link:hover{background-color:#FAFAFA}.share-list__link:hover .share-list__icon--twitter{fill:#55acee}.share-list__link:hover .share-list__icon--facebook{fill:#3b5998}.share-list__link:hover .share-list__icon--linkedin{fill:#2867B2}.share-list__icon{fill:#222}@media only screen and (max-width: 40em){.share-list{margin-bottom:22px}}.FlexEmbed{display:block;overflow:hidden;position:relative}.FlexEmbed:before{content:"";display:block;width:100%}.FlexEmbed--3by1:before{padding-bottom:33.33333%}.FlexEmbed--2by1:before{padding-bottom:50%}.FlexEmbed--16by9:before{padding-bottom:56.25%}.FlexEmbed--4by3:before{padding-bottom:75%}.CoverImage{max-height:600px;max-width:100%;background-position:50%;background-repeat:no-repeat;background-size:cover}code.highlighter-rouge{font-size:16px}.highlight{margin:0 0 27px;color:#f8f8f2;background-color:#272822;background:#272822}.highlight pre,.highlight code{font-family:Hack,monospace;color:#f8f8f2;background-color:#272822;background:#272822}.highlight table td{padding:5px}.highlight table pre{margin:0}.highlight .w{color:#f8f8f2;background-color:#272822}.highlight .err{color:#272822;background-color:#f92672}.highlight .c,.highlight .cd,.highlight .cm,.highlight .c1,.highlight .cs{color:#75715e}.highlight .cp{color:#f4bf75}.highlight .nt{color:#f4bf75}.highlight .o,.highlight .ow{color:#f8f8f2}.highlight .p,.highlight .pi{color:#f8f8f2}.highlight .gi{color:#a6e22e}.highlight .gd{color:#f92672}.highlight .gh{color:#66d9ef;background-color:#272822;font-weight:bold}.highlight .k,.highlight .kn,.highlight .kp,.highlight .kr,.highlight .kv{color:#ae81ff}.highlight .kc{color:#fd971f}.highlight .kt{color:#fd971f}.highlight .kd{color:#fd971f}.highlight .s,.highlight .sb,.highlight .sc,.highlight .sd,.highlight .s2,.highlight .sh,.highlight .sx,.highlight .s1{color:#a6e22e}.highlight .sr{color:#a1efe4}.highlight .si{color:#cc6633}.highlight .se{color:#cc6633}.highlight .nn{color:#f4bf75}.highlight .nc{color:#f4bf75}.highlight .no{color:#f4bf75}.highlight .na{color:#66d9ef}.highlight .m,.highlight .mf,.highlight .mh,.highlight .mi,.highlight .il,.highlight .mo,.highlight .mb,.highlight .mx{color:#a6e22e}.highlight .ss{color:#a6e22e}@media only screen and (min-width: 64.063em){.navigation{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #DADFE1}}.navigation li{display:block;margin-bottom:7px;font-size:14px;line-height:22px}.navigation li:last-child{margin-bottom:0}@media only screen and (max-width: 64em){.navigation li{display:block;text-align:center;margin-right:0;line-height:27px}}.navigation a{transition:.4s;text-decoration:none}@media only screen and (max-width: 64em){.navigation a{display:block;padding-top:7px;padding-bottom:7px;border-bottom:1px solid #ECF0F1}}@media only screen and (max-width: 64em){.navigation{margin-bottom:7px}}.social-nav{margin-bottom:22px;list-style:none;padding:0}.social-nav .icon{vertical-align:-moz-middle-with-baseline;vertical-align:-webkit-baseline-middle;fill:#222;transition:.4s}.social-nav .icon:hover{fill:#7E7E7E}.social-nav li{display:inline-block}@media only screen and (max-width: 64em){.social-nav{text-align:center}}.pagination{clear:both;font-size:12px;line-height:22px}.pagination span,.pagination .icon{position:relative}.pagination .newer-posts{float:left;text-align:left}.pagination .newer-posts span,.pagination .newer-posts .icon{left:-7.3333333333px}.pagination .older-posts{float:right;text-align:right}.pagination .older-posts span,.pagination .older-posts .icon{right:-7.3333333333px}.pagination a{text-decoration:none;text-transform:uppercase;letter-spacing:.2em;transition:.4s}.post-navigation{flex-grow:1}.post-navigation .post-card{border-bottom:0;margin-bottom:0}.post-navigation:before{position:absolute;z-index:1;content:"";top:14px;padding:0 14px;font-size:14px;color:#7E7E7E;background-color:rgba(255,255,255,0.9);transition:.4s}.post-navigation.prev:before{left:27px;content:"Previous Story"}.post-navigation.next:before{right:27px;content:"Next Story"}.post-navigation:hover:before{background-color:#fff}.heading-link{text-decoration:none !important;margin-left:10px;opacity:0.3}.sidebar{padding:11px 0;line-height:22px}@media only screen and (max-width: 64em){.sidebar{background-color:#fff;border-bottom:1px solid #ECF0F1}}@media only screen and (min-width: 64.063em){.sidebar{position:fixed;top:0;left:0;width:250px;height:100%;background-color:#FAFAFA;padding:27px 0;display:flex;align-items:center;text-align:center}}.sidebar__logo{margin-bottom:7px}.sidebar__logo a{transition:.4s;text-decoration:none;letter-spacing:1px}.sidebar__logo a:hover{color:#7E7E7E}@media only screen and (max-width: 64em){.sidebar__logo{margin-bottom:0;line-height:22px}}.sidebar__description{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #DADFE1}@media only screen and (max-width: 64em){.sidebar__description{display:none}}.sidebar__bottom{text-align:center}@media only screen and (min-width: 64.063em){.sidebar__bottom{position:absolute;right:0;left:0;bottom:27px}}@media only screen and (max-width: 64em){.home-template .sidebar{border-bottom:1px solid #ECF0F1}}.off-canvas-toggle{display:none}@media only screen and (max-width: 64em){.off-canvas-toggle{float:right;display:block;margin-right:7px;font-size:14px;cursor:pointer}}@media only screen and (max-width: 64em){html,body{overflow-x:hidden}.off-canvas-content{position:fixed;top:0;right:0;width:250px;height:100%;background-color:#fff;border-left:1px solid #ECF0F1;transform:translate3d(250px, 0, 0)}.off-canvas-container{transition:all .4s cubic-bezier(0.16, 0.63, 0.45, 0.98)}.off-canvas-container.is-active{transform:translate3d(-250px, 0, 0)}}.search-form-container{position:fixed;top:0;right:0;bottom:0;left:0;z-index:101;white-space:nowrap;background:#fff;opacity:0;visibility:hidden;transition:all .4s ease-in-out;transform:translate(0px, -100%) scale(0, 0)}.search-form-container__close{position:absolute;top:27px;right:27px;width:27px;height:27px;cursor:pointer;text-align:center}.search-form-container__close .icon{vertical-align:text-top;transition:.4s;fill:#222}.search-form-container__close .icon:hover{fill:#7E7E7E;transform:rotate(90deg)}@media only screen and (max-width: 40em){.search-form-container__close{top:14px;right:14px}}.search-form-container.is-active{opacity:1;visibility:visible;transform:translate(0px, 0px) scale(1, 1)}.search-form{margin-bottom:14px}.search-form__field{padding:0;width:100%;outline:none;font-size:38px;line-height:54px;border:0;border-bottom:1px solid #ECF0F1}@media only screen and (max-width: 40em){.search-form__field{font-size:28px;line-height:40px}}.search-form__field:focus{border:0;border-bottom:1px solid #ECF0F1}.search-form__submit{display:none}.search-form__fieldset{border:0;margin-top:54px;padding:0}.search-results{display:none;height:80vh;overflow:auto;white-space:normal}.search-results .heading{margin-right:14px;margin-bottom:27px;color:#7E7E7E}.search-results__item{margin-bottom:14px;margin-right:14px;padding-bottom:14px;border-bottom:1px solid #ECF0F1}.search-results__item__title{display:block;text-decoration:none;font-size:16px;line-height:22px}.search-results__item__date{font-size:12px;line-height:20px;color:#7E7E7E}.author-image{float:left;margin:0;margin-right:22px}.author-image .img{height:81px;width:81px;background-position:center;background-size:cover;border-radius:100%}@media only screen and (max-width: 40em){.author-image .img{height:54px;width:54px}}@media only screen and (min-width: 64.063em){.author-image{margin-right:27px}}.author-meta{text-indent:-1px}.author-meta .icon{fill:#222;transition:.4s}.author-meta a .icon:hover{fill:#7E7E7E}.post{position:relative;padding:27px 0;margin:0 auto;max-width:45em;background:#fff}.post a{text-decoration:underline;cursor:pointer}@media only screen and (min-width: 40.063em){.post{top:-54px;padding:27px}}@media only screen and (min-width: 64.063em){.post{top:-81px;padding:54px}}.post__header{margin-bottom:11px;text-align:center}.post__title{margin-bottom:11px;font-size:32px;line-height:44px}@media only screen and (max-width: 40em){.post__title{font-size:19px;line-height:27px}}.post__date{font-size:14px;line-height:20px;color:#7E7E7E}.post-content{margin-top:22px}.grey-bg{background-color:#FAFAFA}.no-bullets,.list-bare{list-style:none}.bullets-inside{list-style:inside}.list-bare{margin:0;padding:0}.text-left{text-align:left}.text-right{text-align:right}.text-center{text-align:center}.text-justify{text-align:justify}.inline{display:inline}.block{display:block}.inline-block{display:inline-block}.hide{display:none}.left{float:left}.right{float:right}.hidden{border:0 none;clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;padding:0;position:absolute !important;width:1px}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}.light{font-weight:300}.regular{font-weight:400}.bold{font-weight:700}.italic{font-style:italic}.cap{text-transform:capitalize}.uppercase{text-transform:uppercase}.ell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.font-base{font-size:19px}.font-medium{font-size:16px;line-height:22px}.font-small{font-size:14px;line-height:20px}.font-tiny{font-size:12px;line-height:17px}
+
+  </style>
+
+  <script>
+    var base_url = "";
+  </script>
+</head>
+
+<body>
+
+  <!-- Google Analytics Code -->
+
+  <div class="off-canvas-container">
+    <div class="sidebar non-print">
+  <div class="row">
+
+    <div class="column small-10 large-12">
+      <h1 class="sidebar__logo logo">
+        <a href="/">
+          <img src="/images/lenardev_blog_logo.png" draggable="false" alt="lenar.dev"/>
+        </a>
+      </h1>
+      <div class="sidebar__description font-small">Bartosz Lenar's space for tech thoughts.</div>
+    </div>
+
+    <label class="off-canvas-toggle"><span data-icon="ei-navicon" data-size="s"></span></label>
+
+    <div class="off-canvas-content">
+
+      <div class="column small-12 large-12">
+        <nav class="navigation">
+          <ul class="list-bare text-center">
+            <li>
+              <a class="page-link" href="/">Posts</a>
+            </li>
+
+            
+              
+            
+              
+                
+              
+            
+              
+                
+                  <li>
+                    <a class="page-link" href="/hire-me">Hire me</a>
+                  </li>
+                
+              
+            
+              
+                
+              
+            
+              
+                
+                  <li>
+                    <a class="page-link" href="/tags">Tags</a>
+                  </li>
+                
+              
+            
+              
+                
+              
+            
+              
+                
+              
+            
+              
+                
+              
+            
+              
+                
+              
+            
+              
+                
+              
+            
+
+            <li><a class="toggle-search-button icon-feed" href="#">Search</a></li>
+            <li><a class="subscribe-button icon-feed" href="/feed.xml" target="_blank">Feed</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="column small-12 large-12">
+        <ul class="social-nav social-icons">
+          <li>
+            <a href="https://www.github.com/bartoszlenar" target="_blank">
+              <span data-icon="ei-sc-github" data-size="s"></span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.twitter.com/bartoszlenar" target="_blank">
+              <span data-icon="ei-sc-twitter" data-size="s"></span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/bartoszlenar" target="_blank">
+              <span data-icon="ei-sc-linkedin" data-size="s"></span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/bartoszlenar" target="_blank">
+              <span data-icon="ei-sc-instagram" data-size="s"></span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:bartosz@lenar.dev" target="_blank">
+              <span data-icon="ei-envelope" data-size="s"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar__bottom">
+        <div class="column small-12 large-12">
+          <div class="font-tiny">
+            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">BY-NC-ND</a> 2022 Bartosz Lenar
+          </div>
+          <div style="font-size: xx-small; line-height: 10px; ">
+            The opinions expressed here are my own and not necessarily those of my employer.
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- off-canvas-content -->
+
+  </div>
+</div>
+
+<div class="search-form-container">
+
+  <form class="search-form">
+    <fieldset class="search-form__fieldset">
+      <div class="row">
+        <div class="column column--center large-8">
+          <input class="search-form__field" placeholder="Type to search" autofocus>
+          <input class="search-form__submit" type="submit" value="search">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="row">
+    <div class="column column--center large-8">
+      <div class="search-results"></div>
+    </div>
+  </div>
+
+  <div class="close-search-button search-form-container__close">
+    <span data-icon="ei-close" data-size="s"></span>
+  </div>
+
+</div>
+
+    
+
+<div class="wrapper">
+  <div class="row row--full">
+
+    <div class="column column--center medium-12 large-12 non-print">
+      <div class="grey-bg CoverImage FlexEmbed FlexEmbed--16by9" style="background-image: url(/images/posts/crafting-model-specifications-using-validot/background.jpg)"></div>
+    </div>
+
+    <div class="column column--center medium-12 large-10">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+        <header class="post__header">
+          <h2 class="post__title" itemprop="name headline">Crafting model specifications using Validot</h2>
+          <time class="post__date" datetime="2022-09-26T08:00:00+02:00" itemprop="datePublished">2022-09-26</time>
+        </header>
+
+        <div class="post-content heading-links" itemprop="articleBody">
+          <p>The Validot project comes with comprehensive documentation, excellent for looking up how certain features work. On the other hand, documentations don’t always serve as great tutorials or walkthrough guides, which in Validot is very much the case. This blog post aspires to answer this problem. Following the real-life use case, we’ll proceed step-by-step with creating a fully-featured specification using Validot’s advanced fluent-driven interface.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>Imagine having a web form that allows users to sign up. There is a text field for the one’s name that’s supposed to be validated. We’ll start with the bare minimum form of Validot’s specification:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Specification&lt;T&gt;</code> describes a valid state of <code class="highlighter-rouge">T</code> instances. Struct or class, custom type, or something from the framework’s built-in namespace - <code class="highlighter-rouge">T</code> has no constraints and could be virtually anything you need it to be. Above, <code class="highlighter-rouge">Specification&lt;string&gt;</code> describes a valid string object and the assigned value (<code class="highlighter-rouge">s =&gt; s</code>) is a fluent API expression builder, a method chain that, in this particular case, stands empty.</p>
+
+<p>Methods that are part of the chain are called <em>commands</em>. By default, Validot requires the value to be non-null, so even having no explicitly defined commands, the specification is correct and says the following: “there are no rules for a string value, but the value itself needs to be non-null”.</p>
+
+<p>An empty specification can hardly play a role in a real-life scenario, so how about adding some logic:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">3</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Rule</code> is an essential fluent API command because it allows defining a custom validation code. It takes the regular dotnet’s <code class="highlighter-rouge">Predicate&lt;T&gt;</code> that receives the analyzed value and is supposed to return <code class="highlighter-rouge">true</code> if it’s valid and <code class="highlighter-rouge">false</code> if otherwise. Having said that, the above snippet could easily be replaced by:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Predicate</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">mustHaveMoreThanThreeCharacters</span> <span class="p">=</span> <span class="n">text</span> <span class="p">=&gt;</span> <span class="n">text</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">3</span><span class="p">;</span>
+
+<span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">mustHaveMoreThanThreeCharacters</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>There is no sanctioned way of doing this. Sometimes the code might benefit from defining predicates separately (e.g., when you want to utilize one in multiple places), but in general - it’s totally up to your personal preference.</p>
+
+<h2 id="validator">Validator</h2>
+
+<p>So, at this point, we have a specification that says “a string value must be present (non-null) and must have more than three characters”. However, specification on its own is merely a definition of the valid state. Not much less than a bunch of instructions on distinguishing a valid entity from an invalid. Executing these instructions against objects is the validator’s job. You can create one by calling the static factory <code class="highlighter-rouge">Validator.Factory.Create&lt;T&gt;</code>, where the generic argument <code class="highlighter-rouge">T</code> comes from the delivered <code class="highlighter-rouge">Specification&lt;T&gt;</code>, and then lands in the produced <code class="highlighter-rouge">Validator&lt;T&gt;</code>:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">IsValid</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="n">validator</span><span class="p">.</span><span class="nf">IsValid</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">);</span> <span class="c1">// false</span>
+
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">);</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Invalid</span>
+</code></pre></div></div>
+
+<p>That’s right: <code class="highlighter-rouge">Validator&lt;T&gt;</code> can process only objects of type <code class="highlighter-rouge">T</code>, according to the single <code class="highlighter-rouge">Specitication&lt;T&gt;</code> it was created with (nothing stops you from creating multiple validators, though). In exchange, it offers immutability, thread-safety and exceptionally high performance of work, which it does using its two methods <code class="highlighter-rouge">IsValid&lt;T&gt;</code> and <code class="highlighter-rouge">Validate&lt;T&gt;</code>.</p>
+
+<p><code class="highlighter-rouge">IsValid</code> is the ultra-optimized way to make quick correctness checks. It’s super-fast, allocates virtually nothing on the heap, but it has its price: <code class="highlighter-rouge">IsValid</code> delivers no information other than a simple boolean flag. So, if you don’t care about the details and need to drive your app’s logic according to only a binary validation result, using <code class="highlighter-rouge">IsValid</code> makes the most sense.</p>
+
+<p><code class="highlighter-rouge">Validate</code>, on the other hand, delivers a more comprehensive report. For now, we’re interested in its overloaded <code class="highlighter-rouge">ToString()</code> method that prints all error messages (prefixed with their path) in separate lines. In the above snippet, we see only a single <code class="highlighter-rouge">"Invalid"</code>, the default error message for the <code class="highlighter-rouge">Rule</code> command. You can alter its content by placing another command - <code class="highlighter-rouge">WithMessage</code> - directly after the related <code class="highlighter-rouge">Rule</code>. Like this:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">3</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Min length is 4 characters"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">IsValid</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="n">validator</span><span class="p">.</span><span class="nf">IsValid</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">);</span> <span class="c1">// false</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Min length is 4 characters</span>
+</code></pre></div></div>
+
+<h2 id="command-types">Command types</h2>
+
+<p>In theory, a specification can consist of three types of command:</p>
+
+<ul>
+  <li>scope commands - to wrap the validation logic (e.g., <code class="highlighter-rouge">Rule</code>, where we passed our predicate)</li>
+  <li>parameter commands - to parametrize other commands (e.g., <code class="highlighter-rouge">WithMessage</code>, which we used to overwrite the <code class="highlighter-rouge">Rule</code>’s error message)</li>
+  <li>presence commands - to set if the value is required or not (by default, it’s always required, but of course, you can alter this behavior).</li>
+</ul>
+
+<p>In practice, it’s much simpler than it might look at first glance. In Validot, there are only two so-called presence commands (<code class="highlighter-rouge">Optional</code> and <code class="highlighter-rouge">Required</code>), and they can be placed only at the beginning of the chain. Therefore, if the specification doesn’t start with <code class="highlighter-rouge">Optional()</code>, then it by default behaves like it would with <code class="highlighter-rouge">Required()</code>.</p>
+
+<p>Secondly, all parameter commands start with <code class="highlighter-rouge">With…</code>, and they affect the closest preceding command that holds validation logic.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.RuleA().WithX(...).WithY(...)
+.RuleB().WithZ(...)
+</code></pre></div></div>
+
+<p>In the above hypothetical example, <code class="highlighter-rouge">RuleA</code> is affected by <code class="highlighter-rouge">WithX</code> and <code class="highlighter-rouge">WithY</code>, and respectively - <code class="highlighter-rouge">RuleB</code> is affected by <code class="highlighter-rouge">WithZ</code>. There are quite a few parameter commands and the <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md" target="_blank">documentation describes them</a> very intensively. <code class="highlighter-rouge">WithMessage</code>, for instance, overwrites the entire output with a single message. Ultimately, that’s what happened - <code class="highlighter-rouge">Rule'</code>s default error content got replaced with <code class="highlighter-rouge">"Min length is 4 characters"</code>.</p>
+
+<h2 id="chaining-commands">Chaining commands</h2>
+
+<p>We already know that specification can contain multiple scope commands, each with its set of aligned parameter commands. This is how it could be arranged in our example:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">3</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Min length is 4 characters"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;</span> <span class="m">16</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Max length is 15 characters"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Any</span><span class="p">()</span> <span class="p">&amp;&amp;</span> <span class="kt">char</span><span class="p">.</span><span class="nf">IsUpperCase</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="nf">First</span><span class="p">())).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Must start with a capital letter"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>When you look at it, it’s a reasonably well-structured method chain: each line wrapping a single rule and all of its modifiers. But most code editors will try to break it according to the one-method-one-line style. To maintain readability, you might consider using <code class="highlighter-rouge">And()</code> to visually separate the subsequent scope commands. <code class="highlighter-rouge">And</code> command contains no logic and does nothing - its sole purpose is to break method chains into groups:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">3</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Min length is 4 characters"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&lt;</span> <span class="m">16</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Max length is 15 characters"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Any</span><span class="p">()</span> <span class="p">&amp;&amp;</span> <span class="kt">char</span><span class="p">.</span><span class="nf">IsUpperCase</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="nf">First</span><span class="p">()))</span>
+    <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Must start with a capital letter"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Both the above specifications are logically the same:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">IsValid</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="n">validator</span><span class="p">.</span><span class="nf">IsValid</span><span class="p">(</span><span class="s">"alice"</span><span class="p">);</span> <span class="c1">// false</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"bob"</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Min length is 4 characters</span>
+<span class="c1">// Must start with a capital letter</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"Elizabeth Alexandra Mary"</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Max length is 15 characters</span>
+</code></pre></div></div>
+
+<p>Notice that the string value gets tested against all of the <code class="highlighter-rouge">Rule</code> commands, no matter how many declared failures. This is because an error doesn’t stop the validation. Instead, all error outputs are collected and appear in the final report.</p>
+
+<h2 id="predefined-rules">Predefined rules</h2>
+
+<p>Validot is shipped with dozens of predefined rules, ready to be included within specifications. You can safely assume that they are single-commands combining <code class="highlighter-rouge">Rule</code> with a dedicated predicate, followed by <code class="highlighter-rouge">WithMessage</code> with an appropriate error description. Naturally, you’d still need to write custom predicates for more complex scenarios; however the most common cases are covered pretty well. The complete list is available <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md" target="_blank">in the documentation</a> and constantly gets extended with new releases.</p>
+
+<p>We’ll replace the first four commands in our example with the predefined <code class="highlighter-rouge">MinLength</code> and <code class="highlighter-rouge">MaxLength</code>:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">MinLength</span><span class="p">(</span><span class="m">4</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">MaxLength</span><span class="p">(</span><span class="m">15</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Any</span><span class="p">()</span> <span class="p">&amp;&amp;</span> <span class="kt">char</span><span class="p">.</span><span class="nf">IsUpperCase</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="nf">First</span><span class="p">()))</span>
+    <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Must start with a capital letter"</span><span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"bob"</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Must be at least 15 characters in length</span>
+<span class="c1">// Must start with a capital letter</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"Elizabeth Alexandra Mary"</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Must be at most 15 characters in length</span>
+</code></pre></div></div>
+
+<p>If for whatever reason, you don’t like the error message that comes with a predefined rule, you can always overwrite it by placing <code class="highlighter-rouge">WithMessage</code> directly after it in the fluent API method chain:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">MinLength</span><span class="p">(</span><span class="n">min</span><span class="p">:</span> <span class="m">4</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Min length is {min} characters"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">MaxLength</span><span class="p">(</span><span class="n">max</span><span class="p">:</span> <span class="m">15</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Max length is {max} characters"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Any</span><span class="p">()</span> <span class="p">&amp;&amp;</span> <span class="kt">char</span><span class="p">.</span><span class="nf">IsUpperCase</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="nf">First</span><span class="p">()))</span>
+    <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Must start with a capital letter"</span><span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"bob"</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Min length is 4 characters</span>
+<span class="c1">// Must start with a capital letter</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="s">"Elizabeth Alexandra Mary"</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Max length is 15 characters</span>
+</code></pre></div></div>
+
+<p>In Validot, you can peek at the rule’s argument name and use it inside the message in a placeholder wrapped with curly brackets. Or more figuratively speaking: the <code class="highlighter-rouge">min</code> parameter from <code class="highlighter-rouge">.MinLength(min: 4)</code> goes to <code class="highlighter-rouge">{min}</code> in the message, so effectively <code class="highlighter-rouge">.WithMessage("Min length is {min} characters")</code> prints out <code class="highlighter-rouge">"Min length is 4 characters"</code>.</p>
+
+<p>What’s even more interesting, placeholders support parameters, so if <code class="highlighter-rouge">min</code> is of numeric type , <code class="highlighter-rouge">.WithMessage("Min length is {min|format=000.000|culture=pl-PL} characters")</code> would output <code class="highlighter-rouge">"Min length is 004,000 characters"</code> in the above code snippet.</p>
+
+<p>Message arguments are extensively developed, and the <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#message-arguments" target="_blank">documentation explains all aspects of the formatting</a>, plus contains <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#rules" target="_blank">the complete list of built-in rules along with their parameters</a>.</p>
+
+<h2 id="validating-members">Validating members</h2>
+
+<p>So far, we’ve been taking care of a simple, single string. In practice, though, you’ll be facing multi-level objects with all types of properties: collections, nullables and enums, and - of course - nested models, which means combination of all of these options. Validot allows to easily nest specifications and gracefully handle scenarios containing such a real world’s variety.</p>
+
+<p>At first, we’ll try to model the case in the first paragraph (about the user trying to sign up):</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Contact</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">EmailAddress</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">bool</span> <span class="n">SubscribedToNewsfeed</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">bool</span><span class="p">?</span> <span class="n">TermsAndConditionsAccepted</span>  <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">MiddleNames</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">int</span><span class="p">?</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="n">Contact</span> <span class="n">Contact</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To validate a model’s property, use the <code class="highlighter-rouge">Member</code> command with two arguments: the first is the expression selecting this property, and the second is the specification for it. Since we already have <code class="highlighter-rouge">nameSpecification</code> done, we can apply it to both <code class="highlighter-rouge">FirstName</code> and <code class="highlighter-rouge">LastName</code> members:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">nameSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">nameSpecification</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Member</code> opens a new nested scope (and that’s why it’s called a scope command) that works independently from its parent. All spotted errors will be saved with an additional information about the exact path where it occurred. For example, the result’s <code class="highlighter-rouge">ToString()</code> printing will include it directly before each message. Like this:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">user</span> <span class="p">=</span> <span class="k">new</span> <span class="n">User</span>
+<span class="p">{</span>
+    <span class="n">FirstName</span> <span class="p">=</span> <span class="s">"Elizabeth Alexandra Mary"</span><span class="p">,</span>
+    <span class="n">LastName</span> <span class="p">=</span> <span class="s">"bob"</span>
+<span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// FirstName: Min length is 4 characters</span>
+<span class="c1">// FirstName: Must start with a capital letter</span>
+<span class="c1">// LastName: Max length is 15 characters</span>
+</code></pre></div></div>
+
+<p>The result contains also <code class="highlighter-rouge">MessageMap</code> dictionary that for each path holds the collection of errors, so you can examine them independently, one by one:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">lastNameErrors</span> <span class="p">=</span> <span class="n">result</span><span class="p">.</span><span class="n">MessageMap</span><span class="p">[</span><span class="s">"FirstName"</span><span class="p">];</span>
+
+<span class="c1">// lastNameErrors.Length == 2</span>
+<span class="c1">// lastNameErrors[0] == "Min length is 4 characters"</span>
+<span class="c1">// lastNameErrors[1] == "Must start with a capital letter"</span>
+</code></pre></div></div>
+
+<p>You can also pass an inline specification to the <code class="highlighter-rouge">Member</code> command, as well as introduce more and more nested levels according to your needs and the model’s structure.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">nameSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">nameSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">Contact</span><span class="p">,</span> <span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span>
+        <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">EmailAddress</span><span class="p">,</span> <span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span>
+            <span class="p">.</span><span class="nf">Email</span><span class="p">()</span>
+            <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Email is very invalid"</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+            <span class="p">.</span><span class="nf">MaxLength</span><span class="p">(</span><span class="m">30</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">user</span> <span class="p">=</span> <span class="k">new</span> <span class="n">User</span>
+<span class="p">{</span>
+    <span class="n">FirstName</span> <span class="p">=</span> <span class="s">"Elizabeth"</span><span class="p">,</span>
+    <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Smith"</span><span class="p">,</span>
+    <span class="n">Contact</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Contact</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">EmailAddress</span> <span class="p">=</span> <span class="s">"invalid_email"</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Contact.EmailAddress: Email is very invalid</span>
+</code></pre></div></div>
+
+<p>Paths use dot as a separator between the property names:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span><span class="p">.</span><span class="n">MessageMap</span><span class="p">[</span><span class="s">"Contact.EmailAddress"</span><span class="p">].</span><span class="n">Length</span>
+<span class="c1">// 1</span>
+
+<span class="n">result</span><span class="p">.</span><span class="n">MessageMap</span><span class="p">[</span><span class="s">"Contact.EmailAddress"</span><span class="p">].</span><span class="nf">Single</span><span class="p">()</span> <span class="p">==</span> <span class="s">"Email is very invalid"</span>
+<span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>Because <code class="highlighter-rouge">MessageMap</code> is a regular dotnet’s dictionary, you can verify a specific property easily with the built-in <code class="highlighter-rouge">ContainsKey</code> method:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span><span class="p">.</span><span class="n">MessageMap</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="s">"Contact.EmailAddress"</span><span class="p">)</span>
+<span class="c1">// true</span>
+</code></pre></div></div>
+
+<h2 id="validating-collections">Validating collections</h2>
+
+<p>Although <code class="highlighter-rouge">Member</code> can handle all types of nested structures, collections are a bit tricky. For instance, <code class="highlighter-rouge">Member</code> requires a fixed path to a specific object, but you can’t possibly know how many items the collection has when constructing specification. Of course, you could receive the entire collection in the <code class="highlighter-rouge">Rule</code>’s predicate, but how to apply another specification for each item? And how would the path of their eventual error messages look like? Validot comes to the rescue with <code class="highlighter-rouge">AsCollection</code> command, available for all objects that derive from <code class="highlighter-rouge">IEnumerable&lt;T&gt;</code>.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;</span> <span class="n">middleNamesCollectionSpec</span> <span class="p">=</span> <span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span>
+    <span class="p">.</span><span class="nf">AsCollection</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Similarly to <code class="highlighter-rouge">Member</code>, <code class="highlighter-rouge">AsCollection</code> is a scope command, which means that an independent context (scope) is opened for the nested objects. Only this time, there are multiple scopes, because <code class="highlighter-rouge">AsCollection</code> applies the delivered specification to the all items acquired - one by one - from the enumerator. The path for their error output is <code class="highlighter-rouge">#n</code>, where <code class="highlighter-rouge">n</code> is the index under which they have been yielded to validation.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">middleNamesCollectionSpec</span><span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">middleNames</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="s">"bob"</span><span class="p">,</span> <span class="s">"Elizabeth Alexandra Mary"</span> <span class="p">};</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">middleNames</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// #0: Min length is 4 characters</span>
+<span class="c1">// #0: Must start with a capital letter</span>
+<span class="c1">// #1: Max length is 15 characters</span>
+</code></pre></div></div>
+
+<p>Naturally, next to <code class="highlighter-rouge">AsCollection</code> you can place other custom and <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#collections-rules">built-in rules</a> to validate the collection as a whole. For example, <code class="highlighter-rouge">MaxCollectionSize</code> to specify the maximum number of objects it could have.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userMiddleNamesSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">MiddleNames</span><span class="p">,</span> <span class="n">names</span> <span class="p">=&gt;</span> <span class="n">names</span>
+    	<span class="p">.</span><span class="nf">AsCollection</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">)</span>
+	<span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+	<span class="p">.</span><span class="nf">MaxCollectionSize</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+	<span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Maximum three middle names are allowed"</span><span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">user</span> <span class="p">=</span> <span class="k">new</span> <span class="n">User</span>
+<span class="p">{</span>
+    <span class="n">MiddleNames</span> <span class="p">=</span> <span class="k">new</span> <span class="p">[]</span> <span class="p">{</span> <span class="s">"bob"</span><span class="p">,</span> <span class="s">"Alexander"</span><span class="p">,</span> <span class="s">"patrick"</span><span class="p">,</span> <span class="s">"Al"</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">userMiddleNamesSpecification</span><span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// MiddleNames.#0: Min length is 4 characters</span>
+<span class="c1">// MiddleNames.#0: Must start with a capital letter</span>
+<span class="c1">// MiddleNames.#2: Must start with a capital letter</span>
+<span class="c1">// MiddleNames.#3: Min length is 4 characters</span>
+<span class="c1">// MiddleNames: Maximum three middle names are allowed</span>
+</code></pre></div></div>
+
+<h2 id="validating-nullables">Validating nullables</h2>
+
+<p>Nullables may not be as tricky as collections; still, it would be handy to have the underlying value unwrapped and validated effortlessly. And that’s the purpose of yet another scope command - <code class="highlighter-rouge">AsNullable</code>.</p>
+
+<p>In our example, <code class="highlighter-rouge">User</code> contains the <code class="highlighter-rouge">Age</code> property of type <code class="highlighter-rouge">Nullable&lt;T&gt;</code> (<code class="highlighter-rouge">int?</code>). Using <code class="highlighter-rouge">AsNullable</code> we can write the specification for just <code class="highlighter-rouge">int</code> and apply it directly to <code class="highlighter-rouge">Age</code>.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">ageSpecification</span> <span class="p">=</span> <span class="n">age</span> <span class="p">=&gt;</span> <span class="n">age</span>
+    <span class="p">.</span><span class="nf">GreaterThanOrEqualTo</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Age must be 0 or more"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">LessThan</span><span class="p">(</span><span class="m">129</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"People don't live that long"</span><span class="p">);</span>
+
+<span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userAgeSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">age</span> <span class="p">=&gt;</span> <span class="n">age</span><span class="p">.</span><span class="nf">AsNullable</span><span class="p">(</span><span class="n">ageSpecification</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>Technically speaking, <code class="highlighter-rouge">AsNullable</code> unwraps the <code class="highlighter-rouge">T</code> value out from <code class="highlighter-rouge">Nullable&lt;T&gt;</code> and validates it according to the given <code class="highlighter-rouge">Specification&lt;T&gt;</code>.</p>
+
+<p>In contrast to <code class="highlighter-rouge">AsCollection</code> and <code class="highlighter-rouge">Member</code>, <code class="highlighter-rouge">AsNullable</code> saves the error output under the same path. Therefore, you shouldn’t expect <code class="highlighter-rouge">Age.Value</code> path in the results, but just <code class="highlighter-rouge">Age</code>.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="m">140</span><span class="p">;</span> <span class="p">});</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Age: People don't live that long</span>
+</code></pre></div></div>
+
+<p>The above code presents usage of <code class="highlighter-rouge">AsNullable</code>, however in this particular case you can achieve the same results without it. In our example, <code class="highlighter-rouge">ageSpecification</code> uses only built-in rules, without any extra custom logic. And all built-in rules for the value types Validot delivers in both standard and nullable version. Therefore, <code class="highlighter-rouge">GreaterThanOrEqualTo</code> and <code class="highlighter-rouge">LessThan</code> could be applied directly, like this:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userAgeSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">age</span> <span class="p">=&gt;</span> <span class="n">age</span>
+        <span class="p">.</span><span class="nf">GreaterThanOrEqualTo</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Age must be 0 or more"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">LessThan</span><span class="p">(</span><span class="m">129</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"People don't live that long"</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Of course, in other cases (e.g., custom logic and reusing already prepared specifications), <code class="highlighter-rouge">AsNullable</code> makes your life easier.</p>
+
+<h2 id="making-a-value-optional">Making a value optional</h2>
+
+<p>The last command type is called a presence command and includes commands like <code class="highlighter-rouge">Required()</code> and <code class="highlighter-rouge">Optional()</code>. Their names are pretty self-explanatory, but just to have it on paper: their sole purpose is to define whether null is an acceptable case or an error.</p>
+
+<p>As previously mentioned, in Validot everything is required to be non-null by default, so it doesn’t matter whether you start with <code class="highlighter-rouge">Required()</code> or not. These two specifications below are equal to each other:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userAgeSpecification1</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">age</span> <span class="p">=&gt;</span> <span class="n">age</span>
+        <span class="p">.</span><span class="nf">AsNullable</span><span class="p">(</span><span class="n">ageSpecification</span><span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userAgeSpecification2</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">age</span> <span class="p">=&gt;</span> <span class="n">age</span>
+        <span class="p">.</span><span class="nf">Required</span><span class="p">()</span>
+        <span class="p">.</span><span class="nf">AsNullable</span><span class="p">(</span><span class="n">ageSpecification</span><span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">validator1</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">userAgeSpecification1</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">validator2</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">userAgeSpecification1</span><span class="p">);</span>
+
+<span class="n">validator1</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="k">null</span> <span class="p">}).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Age: Required</span>
+
+<span class="n">validator2</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="k">null</span> <span class="p">}).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Age: Required</span>
+</code></pre></div></div>
+
+<p>However, explicitly using the <code class="highlighter-rouge">Required</code> command in the specification lets you define a custom error output in case of null.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userAgeSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">age</span> <span class="p">=&gt;</span> <span class="n">age</span>
+        <span class="p">.</span><span class="nf">Required</span><span class="p">()</span>
+        <span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Information about age is mandatory for all user profiles"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+        <span class="p">.</span><span class="nf">AsNullable</span><span class="p">(</span><span class="n">ageSpecification</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">userAgeSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="k">null</span> <span class="p">}).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Age: Information about age is mandatory for all user profiles</span>
+</code></pre></div></div>
+
+<p>The opposition to <code class="highlighter-rouge">Required</code> is - of course - <code class="highlighter-rouge">Optional</code> and it makes a no-value acceptable. In case of null nothing happens (no error is recorded) and validation proceeds with further commands.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">optionalUserAgeSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">Age</span><span class="p">,</span> <span class="n">a</span> <span class="p">=&gt;</span> <span class="n">a</span>
+        <span class="p">.</span><span class="nf">Optional</span><span class="p">()</span>
+        <span class="p">.</span><span class="nf">AsNullable</span><span class="p">(</span><span class="n">ageSpecification</span><span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">optionalUserAgeSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="k">null</span> <span class="p">}).</span><span class="n">AnyErrors</span><span class="p">;</span> <span class="c1">// false</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="m">18</span> <span class="p">}).</span><span class="n">AnyErrors</span><span class="p">;</span> <span class="c1">// false</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="m">188</span> <span class="p">}).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Age: People don't live that long</span>
+</code></pre></div></div>
+
+<h2 id="merging-and-extending-specifications">Merging and extending specifications</h2>
+
+<p>So far in this post, we’ve created quite a few specifications for the <code class="highlighter-rouge">User</code> class while describing different types of Validot commands. The first one, <code class="highlighter-rouge">userSpecification</code>, shows how to validate members, but there have also been <code class="highlighter-rouge">userMiddleNamesSpecification</code> for collections and <code class="highlighter-rouge">optionalUserAgeSpecification</code> for the optional nullable values.</p>
+
+<p>Is there a way to glue them together so we don’t need to duplicate the code? There is. In theory, <code class="highlighter-rouge">AsModel</code> is the command that applies the delivered specification directly to the current value. Effectively, it allows the user to merge multiple specifications into one:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">finalUserSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">userSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">userMiddleNamesSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">optionalUserAgeSpecification</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The presented above <code class="highlighter-rouge">finalUserSpecification</code> works the same as it had all commands from <code class="highlighter-rouge">userSpecification</code>, <code class="highlighter-rouge">userMiddleNamesSpecification</code>, and <code class="highlighter-rouge">optionalUserAgeSpecification</code> copy-pasted one after another. Let’s present it:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">user</span> <span class="p">=</span> <span class="k">new</span> <span class="n">User</span>
+<span class="p">{</span>
+    <span class="n">MiddleNames</span> <span class="p">=</span> <span class="k">new</span> <span class="p">[]</span> <span class="p">{</span> <span class="s">"bob"</span><span class="p">,</span> <span class="s">"Alexander"</span><span class="p">,</span> <span class="s">"patrick"</span><span class="p">,</span> <span class="s">"Al"</span> <span class="p">};</span>
+    <span class="n">LastName</span> <span class="p">=</span> <span class="s">"smith"</span><span class="p">,</span>
+    <span class="n">Contact</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Contact</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">EmailAddress</span> <span class="p">=</span> <span class="s">"invalid_email"</span>
+    <span class="p">},</span>
+    <span class="n">Age</span> <span class="p">=</span> <span class="m">200</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">finalUserSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// FirstName: Required</span>
+<span class="c1">// MiddleNames.#0: Min length is 4 characters</span>
+<span class="c1">// MiddleNames.#0: Must start with a capital letter</span>
+<span class="c1">// MiddleNames.#2: Must start with a capital letter</span>
+<span class="c1">// MiddleNames.#3: Min length is 4 characters</span>
+<span class="c1">// MiddleNames: Maximum three middle names are allowed</span>
+<span class="c1">// LastName: Must start with a capital letter</span>
+<span class="c1">// Contact.EmailAddress: Email is very invalid</span>
+<span class="c1">// Age: People don't live that long</span>
+</code></pre></div></div>
+
+<p>Naturally, <code class="highlighter-rouge">AsModel</code> is a regular Validot command, so you can follow it with another, extending the specification with more and more logic.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">finalUserSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">userSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">userMiddleNamesSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">optionalUserAgeSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">FirstName</span> <span class="p">!=</span> <span class="n">m</span><span class="p">.</span><span class="n">LastName</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"First and last name must be different!"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">user</span> <span class="p">=</span> <span class="k">new</span> <span class="n">User</span>
+<span class="p">{</span>
+    <span class="n">FirstName</span> <span class="p">=</span> <span class="s">"Michael"</span><span class="p">,</span>
+    <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Michael"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">finalUserSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Contact: Required</span>
+<span class="c1">// MiddleNames: Required</span>
+<span class="c1">// First and last name must be different!</span>
+</code></pre></div></div>
+
+<h2 id="overwriting-error-output">Overwriting error output</h2>
+
+<p>Imagine a specification that produces very extensive and comprehensive report with lot of potential errors. We want to reuse it to validate collection of objects, but we don’t care that much about the details, as with large set of items they are nothing but a noise.</p>
+
+<p>Validot allows error output overwriting and in fact, we’ve been using it across all of this post’s code snippets. It’s <code class="highlighter-rouge">WithMessage</code>!</p>
+
+<p>Let’s look back at the first example it appeared:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">nameSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">3</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Min length is 4 characters"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Rule</code> has its default behavior and returns <code class="highlighter-rouge">"Invalid"</code> message, but we overwrote it with a custom one. <code class="highlighter-rouge">WithMessage</code>, as all parameter commands, affect the closest preceding scope command. In the above example, it’s <code class="highlighter-rouge">Rule</code>, but it could be anything.</p>
+
+<p>What happens if <code class="highlighter-rouge">AsCollection</code> is followed by <code class="highlighter-rouge">WithMessage</code> in the specification handling the user middle names?</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">userMiddleNamesSpecification</span> <span class="p">=</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span>
+    <span class="p">.</span><span class="nf">Member</span><span class="p">(</span><span class="n">u</span> <span class="p">=&gt;</span> <span class="n">u</span><span class="p">.</span><span class="n">MiddleNames</span><span class="p">,</span> <span class="n">names</span> <span class="p">=&gt;</span> <span class="n">names</span>
+    	<span class="p">.</span><span class="nf">AsCollection</span><span class="p">(</span><span class="n">nameSpecification</span><span class="p">)</span>
+	<span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Contains invalid name"</span><span class="p">)</span>
+	<span class="p">.</span><span class="nf">And</span><span class="p">()</span>
+	<span class="p">.</span><span class="nf">MaxCollectionSize</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+	<span class="p">.</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Maximum three middle names are allowed"</span><span class="p">)</span>
+    <span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">user</span> <span class="p">=</span> <span class="k">new</span> <span class="n">User</span>
+<span class="p">{</span>
+    <span class="n">MiddleNames</span> <span class="p">=</span> <span class="k">new</span> <span class="p">[]</span> <span class="p">{</span> <span class="s">"bob"</span><span class="p">,</span> <span class="s">"Alexander"</span><span class="p">,</span> <span class="s">"patrick"</span><span class="p">,</span> <span class="s">"Al"</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">finalUserSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// MiddleNames: Contains invalid name</span>
+<span class="c1">// MiddleNames: Maximum three middle names are allowed</span>
+</code></pre></div></div>
+
+<p>No matter how many invalid values are detected in <code class="highlighter-rouge">MiddleNames</code> collection, the output from <code class="highlighter-rouge">AsCollection</code> contains only a single message. This trick works on all scope commands, including <code class="highlighter-rouge">AsModel</code>:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Specification</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">finalUserSpecification</span> <span class="p">=</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">userSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">userMiddleNamesSpecification</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"Invalid collection of middle names"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">AsModel</span><span class="p">(</span><span class="n">optionalUserAgeSpecification</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">Rule</span><span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="n">m</span><span class="p">.</span><span class="n">FirstName</span> <span class="p">!=</span> <span class="n">m</span><span class="p">.</span><span class="n">LastName</span><span class="p">).</span><span class="nf">WithMessage</span><span class="p">(</span><span class="s">"First and last name must be different!"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">user</span> <span class="p">=</span> <span class="k">new</span> <span class="n">User</span>
+<span class="p">{</span>
+    <span class="n">FirstName</span> <span class="p">=</span> <span class="s">"John"</span><span class="p">,</span>
+    <span class="n">MiddleNames</span> <span class="p">=</span> <span class="k">new</span> <span class="p">[]</span> <span class="p">{</span> <span class="s">"bob"</span><span class="p">,</span> <span class="s">"Alexander"</span><span class="p">,</span> <span class="s">"patrick"</span><span class="p">,</span> <span class="s">"Al"</span> <span class="p">};</span>
+    <span class="n">LastName</span> <span class="p">=</span> <span class="s">"Smith"</span><span class="p">,</span>
+    <span class="n">Contact</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Contact</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">EmailAddress</span> <span class="p">=</span> <span class="s">"valid@address"</span>
+    <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">validator</span> <span class="p">=</span> <span class="n">Validator</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">finalUserSpecification</span><span class="p">);</span>
+
+<span class="n">validator</span><span class="p">.</span><span class="nf">Validate</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="c1">// Invalid collection of middle names</span>
+</code></pre></div></div>
+
+<h2 id="validot-is-so-much-more">Validot is so much more</h2>
+
+<p>The list of possibilities doesn’t end here. After reading this post and getting familiar with the philosophy of crafting specifications, you can go on and explore the full set of features detaily described on the <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md" target="_blank">official documentation</a>. Just to give a quick overview of what more to expect; you can</p>
+
+<ul>
+  <li><a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#withextramessage" target="_blank">append messages</a> to the existing error output instead of overwriting everything</li>
+  <li>return <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#code" target="_blank">error codes</a> instead of just messages</li>
+  <li>prepare <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#translations" target="_blank">translations</a> for the error messages (also there are <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#built-in-translations" target="_blank">few translations</a> available out of the box)</li>
+  <li><a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#withpath" target="_blank">overwrite paths</a> of the error output</li>
+  <li><a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#forbidden" target="_blank">forbid</a> the value to be present (set up null as the only valid case)</li>
+  <li><a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#asconverted" target="_blank">convert the value</a> to something different (even of different type) before validating it further</li>
+  <li>prepare your own <a href="https://github.com/bartoszlenar/Validot/blob/main/docs/DOCUMENTATION.md#custom-rules" target="_blank">custom, reusable rules</a> with the same mechanism that the Validot’s internal are using</li>
+</ul>
+
+<p>And much, much more.</p>
+
+<p>Validot is an open-source, MIT-licenced, fully tested, and documented project, hosted entirely on <a href="https://github.com/bartoszlenar/Validot" target="_blank">github</a>.</p>
+
+<p>Type</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dotnet add package Validot
+</code></pre></div></div>
+
+<p>and give it a try in your next dotnet-based microservice.</p>
+
+        </div>
+
+      </article>
+      <div class="only-print">
+        Author: Bartosz Lenar, bartosz@lenar.dev<br/>
+        Date: 2022-09-26<br/>
+        From: https://lenar.dev/posts/crafting-model-specifications-using-validot<br/>
+        Licence: Creative Commons BY-NC-ND https://creativecommons.org/licenses/by-nc-nd/4.0/
+      </div>
+      <div class="post non-print">
+        <div class="post__tags">
+          
+            <a href="/tag/validot" style="text-decoration: none;">validot</a>
+          
+            <a href="/tag/code" style="text-decoration: none;">code</a>
+          
+            <a href="/tag/article" style="text-decoration: none;">article</a>
+          
+        </div>
+        <div>
+          <p class="font-tiny">
+            The post published under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">Creative Commons BY-NC-ND</a> licence.
+          </p>
+        </div>
+
+        <h5 class="separator">
+  <span class="separator__title">Author</span>
+</h5>
+
+<div class="box box--author">
+  <figure class="author-image">
+    <div class="img" style="background-image: url(/images/lenardev_author_mini.png)">
+      <span class="hidden">Bartosz Lenar</span>
+    </div>
+  </figure>
+
+  <div class="box__body">
+
+    <h4 class="box__title">
+      <strong>Bartosz Lenar</strong>
+    </h4>
+
+    <p class="box__text">
+      I'm a computer software professional, playing roles of programmer, technical leader, and solutions architect in my clients' success stories for over ten years.
+      <br />
+      <br />
+      My career as a contractor is marked by delivered projects and maintainable code handed over across a variety of domains, companies, and countries. Among other great work experiences, I'm proud to mention leading a dev team and designing an AI-based data analysis tool in Wroclaw (PL), coding backend architecture of Australia's largest bank in Sydney (AU), or inventing cloud-first data processing pipeline in London (UK).
+      <br />
+      <br />
+      I'm a Microsoft Certified Professional, Master of Science in Computer Science, Open Source contributor, knowledge sharer. Privately - a husband, board games geek, heavy metal fan, and a sushi chef wannabe.
+      <br />
+      <br />
+      Originally from Poland. Former Londoner and Sydneysider, currently based in the mainland EU.
+      <br />
+      <br />
+      Interested in having me on board? <a href="https://lenar.dev/hire-me">Hire me!</a>
+    </p>
+
+  </div><!-- box__body -->
+
+</div><!-- box -->
+
+        
+
+<h5 class="separator">
+  <span class="separator__title">Sharing</span>
+</h5>
+
+<ul class="share-list">
+  <li>
+    <a class="share-list__link" href="https://twitter.com/intent/tweet?text=Crafting model specifications using Validot&url=https://lenar.dev/posts/crafting-model-specifications-using-validot&via=bartoszlenar&related=bartoszlenar" rel="nofollow" target="_blank" title="Share on Twitter">
+      <div data-icon="ei-sc-twitter" data-size="s" class="share-list__icon share-list__icon--twitter"></div>
+    </a>
+  </li>
+  <li>
+    <a class="share-list__link" href="https://facebook.com/sharer.php?u=https://lenar.dev/posts/crafting-model-specifications-using-validot" rel="nofollow" target="_blank" title="Share on Facebook">
+      <div data-icon="ei-sc-facebook" data-size="s" class="share-list__icon share-list__icon--facebook"></div>
+    </a>
+  </li>
+  <li>
+    <a class="share-list__link" href="https://www.linkedin.com/shareArticle?url=https://lenar.dev/posts/crafting-model-specifications-using-validot&title=Crafting model specifications using Validot" rel="nofollow" target="_blank" title="Share on LinkedIn">
+      <div data-icon="ei-sc-linkedin" data-size="s" class="share-list__icon share-list__icon--linkedin"></div>
+    </a>
+  </li>
+</ul>
+
+        
+        <section class="disqus">
+  <h5 class="separator">
+    <span class="separator__title">Comments</span>
+  </h5>
+
+  <div id="disqus_thread"></div>
+
+
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https://lenar.dev/posts/crafting-model-specifications-using-validot";
+    
+    this.page.identifier = "/posts/crafting-model-specifications-using-validot";
+    
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lenardev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+        
+      </div>
+    </div>
+
+  </div> <!-- row-->
+</div> <!-- wrapper -->
+  </div>
+
+  <script src="/js/jquery-2.1.4.min.js"></script>
+  <script src="/js/evil-icons.min.js"></script>
+  <script src="/js/jquery.fitvids.js"></script>
+  <script src="/js/jquery.ghostHunter.min.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+
+</html>
