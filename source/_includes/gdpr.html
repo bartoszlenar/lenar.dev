@@ -1,0 +1,20 @@
+<!-- GDPR Cookie Consent code -->
+
+<script type="module" src="{{ base_path }}/js/cookie-consent/CookieConsent.js" ></script>
+<script type="text/javascript" src="{{ base_path }}/js/cookie-consent/CookieConsentApp.js"></script>
+<script>
+    function resetCookies() {
+      window.localStorage.removeItem("gdpr_cookie_consent");
+      window.location.reload();
+    }
+
+    popupsmartCookieConsentPopup({
+        "siteName" : "lenar.dev" ,
+        "notice_banner_type": "popup",
+        "consent_type": "gdpr",
+        "palette": "light",
+        "language": "English",
+        "privacy_policy_url" : "{{ base_path }}/privacy-policy" ,
+        "preferencesId" : "#",
+    });
+</script>

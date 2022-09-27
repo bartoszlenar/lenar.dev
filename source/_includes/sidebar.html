@@ -22,7 +22,7 @@
             </li>
 
             {% for page in site.pages %}
-              {% unless page.name == '404.md' %}
+              {% unless page.name == '404.md' or page.name == 'privacy-policy.md' %}
                 {% if page.title %}
                   <li>
                     <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
@@ -32,7 +32,6 @@
             {% endfor %}
 
             <li><a class="toggle-search-button icon-feed" href="#">Search</a></li>
-            <li><a class="subscribe-button icon-feed" href="{{ '/feed.xml' | prepend: site.baseurl }}" target="_blank">Feed</a></li>
           </ul>
         </nav>
       </div>
@@ -69,6 +68,10 @@
 
       <div class="sidebar__bottom">
         <div class="column small-12 large-12">
+          <div class="font-tiny">
+            <a class="page-link" style="text-decoration: none;" href="{{ site.baseurl }}/privacy-policy">Privacy policy</a>
+          </div>
+          <br/>
           <div class="font-tiny">
             <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">BY-NC-ND</a> {{ site.time | date: '%Y' }} Bartosz Lenar
           </div>

@@ -5,8 +5,10 @@
 
   <div id="disqus_thread"></div>
 
+  <div id="disqus_disabled">You don't see comments because you didn't allow me to use functionality cookies. Do you want to <a href="javascript:resetCookies();">reset</a> your privacy settings?</div>
 
-  <script>
+  <script type="text/plain" cookie-consent="functionality">$('#disqus_disabled').hide();</script>
+  <script type="text/plain" cookie-consent="functionality">
     var disqus_config = function () {
     this.page.url = "{{ site.url }}{{ page.url }}";
     {% if page.disqus_identifier %}
