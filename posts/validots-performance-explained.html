@@ -57,7 +57,36 @@
 
 <body>
 
-  <!-- Google Analytics Code -->
+  <!-- GDPR Cookie Consent code -->
+
+<script type="module" src="/js/cookie-consent/CookieConsent.js" ></script>
+<script type="text/javascript" src="/js/cookie-consent/CookieConsentApp.js"></script>
+<script>
+    function resetCookies() {
+      window.localStorage.removeItem("gdpr_cookie_consent");
+      window.location.reload();
+    }
+
+    popupsmartCookieConsentPopup({
+        "siteName" : "lenar.dev" ,
+        "notice_banner_type": "popup",
+        "consent_type": "gdpr",
+        "palette": "light",
+        "language": "English",
+        "privacy_policy_url" : "/privacy-policy" ,
+        "preferencesId" : "#",
+    });
+</script>
+
+  <!-- Microsoft Clarity  -->
+
+<script type="text/plain" cookie-consent="tracking">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "dukm7i4sqc");
+</script>
 
   <div class="off-canvas-container">
     <div class="sidebar non-print">
@@ -103,6 +132,8 @@
               
             
               
+            
+              
                 
                   <li>
                     <a class="page-link" href="/tags">Tags</a>
@@ -136,7 +167,6 @@
             
 
             <li><a class="toggle-search-button icon-feed" href="#">Search</a></li>
-            <li><a class="subscribe-button icon-feed" href="/feed.xml" target="_blank">Feed</a></li>
           </ul>
         </nav>
       </div>
@@ -173,6 +203,10 @@
 
       <div class="sidebar__bottom">
         <div class="column small-12 large-12">
+          <div class="font-tiny">
+            <a class="page-link" style="text-decoration: none;" href="/privacy-policy">Privacy policy</a>
+          </div>
+          <br/>
           <div class="font-tiny">
             <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">BY-NC-ND</a> 2022 Bartosz Lenar
           </div>
@@ -529,8 +563,6 @@
     </a>
   </li>
 </ul>
-
-        
         <section class="disqus">
   <h5 class="separator">
     <span class="separator__title">Comments</span>
@@ -538,8 +570,10 @@
 
   <div id="disqus_thread"></div>
 
+  <div id="disqus_disabled">You don't see comments because you didn't allow me to use functionality cookies. Do you want to <a href="javascript:resetCookies();">reset</a> your privacy settings?</div>
 
-  <script>
+  <script type="text/plain" cookie-consent="functionality">$('#disqus_disabled').hide();</script>
+  <script type="text/plain" cookie-consent="functionality">
     var disqus_config = function () {
     this.page.url = "https://lenar.dev/posts/validots-performance-explained";
     
@@ -555,7 +589,35 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 </section>
-        
+
+        <!-- 
+        <section class="disqus">
+  <h5 class="separator">
+    <span class="separator__title">Comments</span>
+  </h5>
+
+  <div id="disqus_thread"></div>
+
+  <div id="disqus_disabled">You don't see comments because you didn't allow me to use functionality cookies. Do you want to <a href="javascript:resetCookies();">reset</a> your privacy settings?</div>
+
+  <script type="text/plain" cookie-consent="functionality">$('#disqus_disabled').hide();</script>
+  <script type="text/plain" cookie-consent="functionality">
+    var disqus_config = function () {
+    this.page.url = "https://lenar.dev/posts/validots-performance-explained";
+    
+    this.page.identifier = "/posts/validots-performance-explained";
+    
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lenardev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+         -->
       </div>
     </div>
 
