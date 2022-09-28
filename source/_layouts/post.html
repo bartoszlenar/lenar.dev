@@ -12,7 +12,7 @@ layout: default
     </div>
 
     <div class="column column--center medium-12 large-10">
-      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting" data-clarity-region="article">
 
         <header class="post__header">
           <h2 class="post__title" itemprop="name headline">{{ page.title }}</h2>
@@ -45,11 +45,10 @@ layout: default
         {% include author.html %}
 
         {% include share.html %}
-        {% include disqus.html %}
 
-        <!-- {% if jekyll.environment == "production" %}
+        {% if jekyll.environment == "production" %}
         {% include disqus.html %}
-        {% endif %} -->
+        {% endif %}
       </div>
     </div>
 
