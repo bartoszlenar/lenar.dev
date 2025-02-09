@@ -14,4 +14,8 @@ export default defineConfig({
       theme: "css-variables",
     },
   },
+  redirects: {
+    "/posts/validots-performance-explained": "https://github.com/bartoszlenar/Validot/blob/main/docs/articles/validots-performance-explained.md",
+    "/posts/crafting-model-specifications-using-validot": "https://github.com/bartoszlenar/Validot/blob/main/docs/articles/crafting-model-specifications-using-validot.md",
+  }
 });
