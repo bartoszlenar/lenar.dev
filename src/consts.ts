@@ -18,8 +18,8 @@ export const GLOBAL: GlobalSite = {
   author: "Bartosz Lenar",
   authorPhotoSrc: "/bartoszlenar.png",
   logo: {
-    darkThemeSrc: "/logo/logo_dark.png",
-    lightThemeSrc: "/logo/logo_light.png",
+    darkThemeSrc: "/logo/lenardev_logo_dark.svg",
+    lightThemeSrc: "/logo/lenardev_logo_light.svg",
   }
 };
 
