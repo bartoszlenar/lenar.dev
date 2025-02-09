@@ -1,18 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250" width="250" height="250">
-  
-  <defs>
-    <pattern id="camouflage" patternUnits="userSpaceOnUse" width="50" height="50">
-      <rect width="50" height="50" fill="#FFFFFF"/>
-      <path d="M0 0 L20 10 L10 20 L30 40 L40 30 L20 20 Z" fill="#000000"/>
-      <path d="M25 5 L35 15 L45 5 L45 25 L35 35 L25 25 Z" fill="#FFFFFF"/>
-      <path d="M10 35 L20 45 L5 45 L5 25 L15 15 Z" fill="#000000"/>
-      <path d="M30 30 L50 50 L40 50 L30 40 Z" fill="#FFFFFF"/>
-    </pattern>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="12.942571mm"
+   height="8.9885597mm"
+   viewBox="0 0 12.942571 8.9885597"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="4.9234037"
+     inkscape:cx="396.27057"
+     inkscape:cy="553.98666"
+     inkscape:window-width="1776"
+     inkscape:window-height="888"
+     inkscape:window-x="192"
+     inkscape:window-y="349"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="12.942572"
+       height="8.9885597"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath8">
+      <path
+         d="M 0,163 H 426 V 0 H 0 Z"
+         transform="translate(-244.23831,-64.327099)"
+         id="path8" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath20">
+      <path
+         d="M 0,163 H 426 V 0 H 0 Z"
+         transform="translate(-222.26271,-38.847701)"
+         id="path20" />
+    </clipPath>
   </defs>
-
-  <rect x="10" y="10" width="230" height="230" rx="20" ry="20" fill="black"/>
-
-  <text x="50" y="200" font-family="Arial, sans-serif" font-size="210" font-weight="bold" fill="url(#camouflage)" stroke="black" stroke-width="0">
-    A
-  </text>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-96.308332,-143.93334)">
+    <path
+       id="path7"
+       d="m 0,0 h -8.343 l 7.357,-12.739 -7.357,-12.74 H 0 l 7.356,12.74 z"
+       style="display:inline;fill:#ed1c24;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(0.35277776,0,0,-0.35277776,106.65587,143.93334)"
+       clip-path="url(#clipPath8)" />
+    <path
+       id="path19"
+       d="M 0,0 H 8.342 L 0.986,12.739 8.342,25.479 H 0 l -7.356,-12.74 z"
+       style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(0.35277776,0,0,-0.35277776,98.903365,152.9219)"
+       clip-path="url(#clipPath20)" />
+  </g>
 </svg>
